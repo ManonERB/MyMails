@@ -1,9 +1,11 @@
 const newMessage = ` 
   <div class="row new-row">
-    <img class="avatar" src="images/avatar-1.jpg" />
+    <img class="avatar" src="images/Manon.jpg" />
     <div class="text-container">
       <h6>Manon ERB</h6>
-      <p>New message</p>
+      <p>Développeuse web front-end toujours happy, cherche nouveaux défis pour se faire la main...
+
+</p>
     </div>
     <span class="delete">✖</span>
   </div>
@@ -30,7 +32,7 @@ document.querySelector('#btn-add').addEventListener('click',
         let message = document.querySelector('#add-message')
            document.querySelector('#msg-container').innerHTML += `
         <div class="row new-row">
-          <img class="avatar" src="images/avatar-2.jpg" />
+          <img class="avatar" src="images/Manon.jpg" />
           <div class="text-container">
             <h6>Manon ERB</h6>
             <p>${message.value}</p>
@@ -39,8 +41,7 @@ document.querySelector('#btn-add').addEventListener('click',
         </div>
        `;
        document.querySelector('#add-message').value = ''
-       //if (message dans sg container) 
-      //  reset placeholder message.value
+
     for (let i=0; i<document.querySelectorAll('.delete').length; i++){ 
       document.querySelectorAll('.delete')[i].addEventListener('click', 
           function() { 
@@ -54,38 +55,44 @@ document.querySelector('#btn-add').addEventListener('click',
           document.querySelector('#count').textContent = messagesCount;
           }
       }
-)
-document.querySelector('#btn-search').addEventListener('click', function(){
-  let textToCompare = document.querySelector("#search-message").value.toLowerCase()
-  let nameMessages =  document.querySelectorAll("h6")
-
-for (const nameMessage of nameMessages) {
-  if(nameMessage.textContent.toLowerCase().includes(textToCompare) === false){
-    console.log(nameMessage.textContent);
-    nameMessage.parentNode.parentNode.style.display= "none"
-  }else{
-    nameMessage.parentNode.parentNode.style.display= "flex"
-  }
+  )
+  document.querySelector('#btn-search').addEventListener('click', function () {
+    let textToCompare = document.querySelector("#search-message").value.toLowerCase();
+    let nameMessages = document.querySelectorAll("h6");
+    let messagesText = document.querySelectorAll("p");
   
+    for (const nameMessage of nameMessages) {
+      if (nameMessage.textContent.toLowerCase().includes(textToCompare) === false) {
+        nameMessage.parentNode.parentNode.style.display = "none";
+      } else {
+        nameMessage.parentNode.parentNode.style.display = "flex";
+      }
+    }
+    for (const messageText of messagesText) {
+      if (messageText.textContent.toLowerCase().includes(textToCompare) === false) {
+        messageText.parentNode.parentNode.style.display = "none";
+      } else {
+        messageText.parentNode.parentNode.style.display = "flex";
+      }
+    }
+    document.querySelector("#search-message").value = '';
+  })
 
-textToCompare.value = ''
-}
-})
-let year = new Date().getUTCFullYear();
-let month;
-let day;
+  let year = new Date().getUTCFullYear();
+  let month = new Date().getUTCMonth();
+  let day = new Date().getUTCDay();
 
-if (new Date().getMonth() < 9) {
-  month = "0" + (new Date().getMonth() + 1);
-} else {
-  month = new Date().getMonth() + 1;
-}
+  if (new Date().getMonth() < 9) {
+    month = "0" + (new Date().getMonth() + 1);
+  } else {
+    month = new Date().getMonth() + 1;
+  }
 
-if (new Date().getDate() < 9) {
-  day = "0" + new Date().getDate();
-} else {
-  day = new Date().getDate();
-}
+  if (new Date().getDate() < 9) {
+    day = "0" + new Date().getDate();
+  } else {
+    day = new Date().getDate();
+  }
 
-const date = year + "-" + month + "-" + day;
-document.querySelector('#footer').innerHTML += `<span id="date">${date}</span>`
+  const date = year + "-" + month + "-" + day;
+  document.querySelector('#footer').innerHTML += `<span id="date">${date}</span>`
